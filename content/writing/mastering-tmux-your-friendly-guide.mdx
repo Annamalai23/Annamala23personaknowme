@@ -1,0 +1,118 @@
+---
+title: Mastering TMUX Your Friendly Guide
+excerpt: Why TMUX? Imagine you’re deploying a large application or running a long script that could take hours to complete. If your terminal session disconnects or if it’s closed accidentally, your proces…
+date: "2024-08-15"
+readTime: 4
+tags: [Systems Design, Mastering, Tmux, Friendly]
+category: Systems Design
+---
+
+<Image src="/images/writing/mastering-tmux-your-friendly-guide/01.jpeg" alt="Mastering TMUX Your Friendly Guide" />
+
+### Why TMUX?
+
+Imagine you’re deploying a large application or running a long script that could take hours to complete. If your terminal session disconnects or if it’s closed accidentally, your process stops, and you have to start over.
+
+With Tmux, even if the terminal is closed, the script would still be running inside Tmux sessions, which you can revisit any time you want.
+
+This capability is gold for developers working on remote servers or running time-intensive tasks.
+
+### What is Tmux? 🤔
+
+**Tmux**, maybe short for **Terminal Multiplexer**, is a tool that allows you to manage multiple terminal sessions within a single terminal.
+
+*🌟It’s like having* *multiple tabs in your terminal,* *each running different tasks, and you can switch between them seamlessly.*
+
+Even better, Tmux lets your processes continue running in the background, so you can detach and reattach to sessions without interrupting your work.
+
+### Installing Tmux 🛠️
+
+Let’s get Tmux installed on your system:
+
+**For Debian/Ubuntu**:
+
+<Code language="text">{`sudo apt install tmux`}</Code>
+
+**For Red Hat/Fedora**:
+
+<Code language="text">{`sudo dnf install tmux`}</Code>
+
+**For macOS (using Homebrew)**:
+
+<Code language="text">{`brew install tmux`}</Code>
+
+**For Windows (using WSL)**:
+
+- Install [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) following the official documentation.
+- Open your Linux distribution in WSL.
+- Install Tmux using your distribution’s package manager (e.g., `sudo apt install tmux` for Debian-based distributions).
+
+<Code language="text">{`sudo apt install tmux`}</Code>
+
+### Getting Started with Tmux 🎉
+
+### Sessions 🖥️
+
+A **session** in Tmux is like a workspace that can hold multiple windows and panes.
+
+#### **1. Create a new session**:
+
+<Code language="text">{`tmux new -s session_name`}</Code>
+
+- This command starts a new session named `session_name`.
+
+#### **2. List all sessions**:
+
+<Code language="text">{`tmux ls`}</Code>
+
+#### **3. Attach to an existing session**:
+
+<Code language="text">{`tmux attach -t session_name`}</Code>
+
+- Reconnects to the specified session.
+
+#### **4. Detach from the current session**:
+
+- Press `Ctrl + b`, then `d`. This detaches you from the session, leaving it running in the background.
+
+### Windows 🪟
+
+**Windows** in Tmux are like tabs in a browser, each running a separate shell or application.
+
+#### **Create a new window**:
+
+- Press `Ctrl + b`, then `c`. Opens a new window within the current session.
+
+#### **Navigate between windows**:
+
+- Press `Ctrl + b`, then `n` to move to the next window.
+- Press `Ctrl + b`, then `p` to move to the previous window.
+- Press `Ctrl + b`, then the window number (e.g., `0`, `1`, `2`) to jump directly to that window.
+
+#### **Rename the current window**:
+
+- Press `Ctrl + b`, then `,`. Allows you to set a custom name for the window, helping keep things organized.
+
+### Panes 🔳
+
+**Panes** allow you to split a window into multiple sections, each running a separate command-line program.
+
+- **Split pane horizontally**: Press `Ctrl + b`, then `%`. Splits the current pane into two, side by side.
+- **Split pane vertically**: Press `Ctrl + b`, then `"`. Splits the current pane into two, one above the other.
+- **Navigate between panes**: Press `Ctrl + b`, then use the arrow keys to move between panes.
+- **Display pane numbers**: Press `Ctrl + b`, then `q`. Shows the index number for each pane.
+- **Select a specific pane**: Press `Ctrl + b`, then `q`, followed by the pane's index number. Moves focus to the chosen pane.
+- **Close the current pane**: Type `exit` or press `Ctrl + d`. Closes the active pane.
+
+### Why Use Tmux? 🌟
+
+- **Persistence**: Keep your applications running even after disconnecting, which is especially useful for remote work.
+- **Organization**: Manage multiple projects or tasks in a single terminal window.
+- **Efficiency**: Navigate between tasks quickly without leaving the terminal.
+- **Customization**: Tailor Tmux to fit your workflow with various configurations.
+
+### Wrapping Up 🎁
+
+Tmux is a versatile tool that can significantly enhance your command-line productivity. By mastering sessions, windows, and panes, you can create a highly efficient and organized terminal workflow.
+
+Happy Tmuxing! 🎉

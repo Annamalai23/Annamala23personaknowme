@@ -1,0 +1,215 @@
+---
+title: Typescript With Node JS A Complete
+excerpt: "Click here to watch the full video tutorial on setting up Node Js With TypeScript(https://youtu.be/hR9rW5TzXM4) - What is TypeScript? - Initial Setup With Express Server - Configure tsconfig.json - I…"
+date: "2024-10-02"
+readTime: 6
+tags: [Systems Design, Typescript, With, Node]
+category: Systems Design
+---
+
+[Click here to watch the full video tutorial on setting up Node Js With TypeScript](https://youtu.be/hR9rW5TzXM4)
+
+- What is TypeScript?
+- Initial Setup With Express Server
+- Configure tsconfig.json
+- Install ts-node
+- Configure nodemon.json
+- Build an express server
+
+Node Js + Express Js is a great and popular choice for the backend. But what if you are building a huge application where the code only gets longer and longer? Then, TypeScript is your application.
+
+Node Js + Express Js + TypeScript can improve the development phase by preventing unwanted errors in production.
+
+<Image src="/images/writing/typescript-with-node-js-a-complete/01.png" alt="Typescript With Node JS A Complete" />
+
+You don’t have to specify any data type for declarations in JavaScript. But TypeScript allows you to add Types to your regular JavaScript. It is an extra measure to easily debug and have more control over what data is running around the application.
+
+Below is a sample code in JavaScript.
+
+```text
+let name = "Naveen"
+
+let details = {
+  name: name,
+  age: 20,
+  college: "SRM"
+}
+```
+
+Here’s the same code in TypeScript.
+
+```text
+let name: string = "Naveen";
+
+let details: {
+  name: string;
+  age: number;
+  college: string;
+} = {
+  name: name,
+  age: 20,
+  college: "SRM"
+};
+```
+
+Got it?
+
+**Note:** The browser doesn’t really understand what TypeScript is. So, when we serve the application to the browser, we first convert it into JS and then serve it to the browser. This process is called **transpiling**.
+
+Create an empty directory and run the command below from the root to get the package.
+
+<Code language="text">{`npm init -y`}</Code>
+
+Install the following packages.
+
+```text
+npm install typescript -g
+npm install express
+npm install @types/express --save-dev
+npm install @types/node --save-dev
+```
+
+- **typescript**— This provides the TypeScript compiler for compiling typescript code to JavaScript.
+- **express** — It allows to set up a server and perform other functionalities that come with it.
+- **@types/express** — Since we are using TypeScript, we might need the actual types of all imported modules. Hence, we are using the Types of Express.
+- **@types/node** — We might also need the Types of Node Js’s built-in packages.
+
+Create a folder named src in the root directory and within the folder, create a file named server.ts and copy-paste the following code. The code includes initialization of the express app, running the server at port 8000, and a route to handle GET requests.
+
+```text
+import express, { Express, Request, Response, NextFunction } from "express";
+
+const app: Express = express();
+
+app.get("/", (req: Request, res: Response, next: NextFunction) => {
+    try {
+        return res.json({
+            message: "TypeScript Node set up successfully",
+        });
+    } catch (err) {}
+});
+
+app.listen(8000, () => {
+    console.log("Server is running at port 8000");
+});
+```
+
+Run the below command to compile TypeScript code to JavaScript.
+
+<Code language="text">{`tsc server.ts`}</Code>
+
+A JavaScript file named server.js will be generated on the same location as server.ts
+
+Now that we are done with the basic setup, let’s move on to creating a common configuration file for executing the TypeScript code.
+
+Create a file named tsconfig.json and copy-paste the following code.
+
+```text
+{
+    "compilerOptions": {
+        "lib": ["es5"],
+        "target": "es5",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "outDir": "dist",
+        "resolveJsonModule": true,
+        "emitDecoratorMetadata": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "sourceMap": true
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules", "**/*.spec.ts"]
+}
+```
+
+**target** — It denotes the JavaScript version that the compiler should convert the TypeScript code to.
+
+**outDir** — The location of the JavaScript files to be stored after the compilation of the TypeScript files.
+
+Earlier, when the TypeScript file is compiled, the generated JS file is placed in the same location but this time all the TS files will be stored in the **dist** folder. When you just run the below command in the root directory, it will detect all the TypeScript files in the **src** directory, compile them, and put the JS files in the dist folder.
+
+<Code language="text">{`tsc`}</Code>
+
+Please refer to this [documentation](https://www.typescriptlang.org/tsconfig) for explanations of all the above fields.
+
+Now that the compilation is done which is not enough. Because the **tsc** command only compiles the code. So, we want something to execute the TypeScript code for the application to run and for the server to start listening to requests.
+
+That’s where we need to install **ts-node** — An NPM package (CLI) that executes the TypeScript code without generating the JavaScript versions of the same code.
+
+<Code language="text">{`npm install ts-node -g`}</Code>
+
+Now, run the below command to start your application.
+
+<Code language="text">{`ts-node ./src/server.ts`}</Code>
+
+You will get the following message down in the console — **Server is running at port 8000**
+
+Here, you must have noticed that your server doesn’t restart every time a new change occurs. Hence, you need something that performs hot-reloading and restarts the server to reflect the changes on the application. So, you basically need two things.
+
+- On every change, the TypeScript code should be compiled into JavaScript code and the changes should be reflected on the respective JavaScript files. This is what’s called hot-reloading.
+- The TypeScript code should also be executed for the server to run.
+
+That’s where we need **Nodemon**—It is an interesting tool used only for development which allows us to write code while the server is running. It restarts the server on every change thereby ensuring that the changes are reflected.
+
+So, please install Nodemon!
+
+<Code language="text">{`npm install nodemon -g`}</Code>
+
+Then, create a file named nodemon.json on the root directory and copy-paste the following code.
+
+```text
+{
+    "watch": ["src"],
+    "ext": ".ts,.js",
+    "ignore": [],
+    "exec": "ts-node ./src/server.ts"
+}
+```
+
+**watch** — It specifies which folder the nodemon needs to keep track of.
+
+**ext**— It specifies what extension the nodemon needs to keep track of.
+
+**exec** — It specifies what commands are to be executed by nodemon.
+
+- **tsc**— This command performs the compilation process from TypeScript to JavaScript
+- **ts-node ./src/server.ts** — This executes the server.ts file which is all we need for running the server.
+
+**Note:** We are running both commands simultaneously using the “&&” symbol as these should be executed on every change along with restarting the server.
+
+In the package.json, remove all the properties within the **scripts,**add the below code.
+
+<Code language="text">{`"server":"nodemon"`}</Code>
+
+Your package.json should look roughly like the below code.
+
+```text
+{
+    "name": "typescript-test",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "server": "nodemon"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/express": "^4.17.21",
+        "@types/node": "^20.11.19",
+    },
+    "dependencies": {
+        "express": "^4.18.2"
+    }
+}
+```
+
+Run the below command from the root directory and you can see your running.
+
+<Code language="text">{`npm run server`}</Code>
+
+Hope everything works well for you. If you have any doubts, please comment them down and I will be more than happy to resolve them.
+
+Happy coding!
