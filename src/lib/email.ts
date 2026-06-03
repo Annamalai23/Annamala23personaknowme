@@ -6,7 +6,7 @@ export function buildEmailHtml(
 ): string {
   return `
     <div style="font-family:monospace;max-width:600px;margin:0 auto;padding:24px;border:1px solid #d0d7de;border-radius:8px;">
-      <h2 style="margin:0 0 4px;font-size:16px;color:#24292f;">New message via naveenrkcreates.com</h2>
+      <h2 style="margin:0 0 4px;font-size:16px;color:#24292f;">New message via annamalai.dev</h2>
       <p style="margin:0 0 20px;font-size:12px;color:#6e7781;">Contact form submission</p>
       <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:20px;">
         <tr>

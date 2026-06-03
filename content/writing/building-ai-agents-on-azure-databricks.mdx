@@ -1,0 +1,99 @@
+---
+title: Building AI Agents on Azure Databricks — A Practical Guide
+excerpt: A hands-on walkthrough of designing, deploying, and monitoring AI agents within Azure Databricks using LangChain and LangGraph for production workflows.
+date: "2026-05-20"
+readTime: 8
+tags: [AI, Azure Databricks, LangChain, Agents]
+category: AI
+isNew: true
+---
+
+## Why AI Agents in Databricks?
+
+Azure Databricks is already the backbone of many enterprise data platforms. Adding AI agents on top unlocks a new layer of automation — not just processing data, but *acting* on it intelligently.
+
+Think: monitoring pipelines, detecting anomalies, triggering automated fixes, or orchestrating multi-step workflows across services.
+
+## The Architecture
+
+A typical agent setup on Databricks looks like this:
+
+1. **Data Sources** — Delta tables, streaming data, or external APIs
+2. **Orchestration** — LangGraph workflows running as Databricks notebooks or jobs
+3. **LLM Gateway** — A FastAPI service that handles prompt routing and model selection
+4. **Action Space** — Python functions that interact with the Databricks API, send alerts, or trigger downstream processes
+
+## Step 1: Define the Tools
+
+Every agent needs tools — those are the actions it can take. On Databricks, this might include:
+
+```python
+from langchain_core.tools import tool
+
+@tool
+def run_databricks_query(query: str) -> str:
+    """Run a SQL query against a Databricks table."""
+    # Spark SQL execution logic here
+    return result
+
+@tool
+def send_teams_alert(message: str) -> str:
+    """Send an alert to Microsoft Teams."""
+    # Webhook logic here
+    return "Alert sent"
+```
+
+## Step 2: Build the Agent Graph
+
+LangGraph lets you model agents as graphs with clear state transitions:
+
+```python
+from langgraph.graph import StateGraph, END
+
+graph = StateGraph(AgentState)
+
+graph.add_node("router", llm_router)
+graph.add_node("analyst", analysis_tool)
+graph.add_node("alerter", alerting_tool)
+
+graph.add_conditional_edges(
+    "router",
+    decide_next_step,
+    {"analyze": "analyst", "alert": "alerter", END: END}
+)
+```
+
+## Step 3: Deploy as a Job
+
+Package your agent as a Databricks Python wheel and deploy it as a scheduled job. Use Azure DevOps for CI/CD:
+
+```yaml
+# azure-pipelines.yml
+- task: DatabricksDeploy@1
+  inputs:
+    clusterId: '$(databricks_cluster)'
+    notebookPath: '/Users/annamalai/agents/pipeline-monitor'
+```
+
+## Monitoring Your Agents
+
+The key to production AI agents is observability. Track:
+
+- **Latency** — How long does each agent step take?
+- **Token Usage** — Are you burning through your LLM budget?
+- **Decision Accuracy** — Is the agent making the right choices?
+
+Use MLflow (built into Databricks) to log every run, every decision, and every error.
+
+## Lessons from Production
+
+After running several agents in production, here's what I've learned:
+
+- **Start simple** — A single-agent loop beats a complex multi-agent graph any day
+- **Fail gracefully** — Every tool call should have a timeout and fallback
+- **Log everything** — You can't debug what you can't see
+- **Human in the loop** — For critical decisions, always have an approval step
+
+## Conclusion
+
+AI agents on Azure Databricks are not just a cool demo — they're a practical way to automate data operations, reduce on-call fatigue, and build smarter pipelines. Start with one agent, measure everything, and iterate.

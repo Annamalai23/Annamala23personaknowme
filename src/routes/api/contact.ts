@@ -31,9 +31,9 @@ export const Route = createFileRoute("/api/contact")({
           },
           body: JSON.stringify({
             from: "Contact Form <onboarding@resend.dev>",
-            to: "business@naveenrkcreates.com",
+            to: "annaraghu2308@gmail.com",
             reply_to: email,
-            subject: `[naveenrkcreates.com] ${subject}`,
+            subject: `[annamalai.dev] ${subject}`,
             html: buildEmailHtml(name, email, subject, message),
           }),
         });

@@ -23,7 +23,7 @@ export function Navbar() {
     <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
         <Link to="/" className="font-mono text-sm font-semibold text-foreground">
-          Naveen RK
+          Annamalai R
         </Link>
 
         {/* Desktop nav */}
@@ -54,7 +54,7 @@ export function Navbar() {
                 <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
                   // navigation
                 </p>
-                <p className="mt-1 font-mono text-sm font-semibold text-foreground">Naveen RK</p>
+                <p className="mt-1 font-mono text-sm font-semibold text-foreground">Annamalai R</p>
               </div>
               <nav className="flex-1 px-3 py-4">
                 {navItems.map((item) => {

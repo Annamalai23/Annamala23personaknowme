@@ -15,13 +15,13 @@ import { Icon } from "@/components/ds/Icon";
 export const Route = createFileRoute("/writing/")({
   head: () => ({
     meta: [
-      { title: "Writing — Naveen RK" },
+      { title: "Writing — Annamalai Raghupathy" },
       {
         name: "description",
         content:
           "Engineering notes on systems, AI, software, developer growth and building on the internet.",
       },
-      { property: "og:title", content: "Writing — Naveen RK" },
+      { property: "og:title", content: "Writing — Annamalai Raghupathy" },
       {
         property: "og:description",
         content:
@@ -54,7 +54,7 @@ function WritingPage() {
     <AppShell>
       <PageHeader
         title="Writing"
-        subtitle="Engineering notes on systems, AI, software, developer growth and building on the internet."
+        subtitle="AI engineering, agentic systems, Azure data platforms, and practical lessons from building production systems."
       />
       <Input
         leftIcon={Search}

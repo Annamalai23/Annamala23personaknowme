@@ -32,7 +32,7 @@ export const Route = createFileRoute("/writing/$slug")({
     return {
       meta: p
         ? [
-            { title: `${p.title} — Naveen RK` },
+            { title: `${p.title} — Annamalai Raghupathy` },
             { name: "description", content: p.excerpt },
             { property: "og:title", content: p.title },
             { property: "og:description", content: p.excerpt },
@@ -71,7 +71,7 @@ function ArticlePage() {
           </span>
           <span>/</span>
           <span className="inline-flex items-center gap-1">
-            <Icon icon={User} size="xs" /> Naveen RK
+            <Icon icon={User} size="xs" /> Annamalai R
           </span>
         </div>
       </div>

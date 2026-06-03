@@ -69,17 +69,21 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
-    title: "Naveen RK Creates",
+    title: "Annamalai Raghupathy · AI Engineer & Agentic AI Developer",
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { name: "description", content: "Help developers build what matters" },
-      { name: "author", content: "Naveen RK" },
+      {
+        name: "description",
+        content:
+          "Annamalai Raghupathy — AI Engineer & Agentic AI Developer. Building production-ready AI agents, LLM applications, and Azure data platforms.",
+      },
+      { name: "author", content: "Annamalai Raghupathy" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
-      { rel: "icon", href: "/favicon.ico?v=1", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
       { rel: "stylesheet", href: appCss },
     ],
   }),

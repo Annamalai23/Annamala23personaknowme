@@ -1,0 +1,71 @@
+---
+title: LLM Observability — What I Learned Building Pipeline Monitors
+excerpt: Practical lessons from implementing LLM-powered observability for Azure data pipelines, including tracing, evaluation, and alerting strategies.
+date: "2026-05-10"
+readTime: 6
+tags: [LLM, Observability, Azure, Monitoring]
+category: Engineering
+---
+
+## Why LLM Observability Matters
+
+When your data pipeline breaks at 2 AM, you need to know why — fast. Traditional monitoring tells you *something* failed. LLM-powered observability tells you *what* failed, *why* it failed, and often *how* to fix it.
+
+Over the past year, I've been building exactly this kind of system on Azure Databricks. Here's what I've learned.
+
+## The Three Pillars
+
+### 1. Tracing
+
+Every LLM call should be traceable end-to-end. This means tracking:
+
+- Input prompts and output completions
+- Token usage per call
+- Latency breakdowns
+- Tool/function calls made by agents
+
+Use MLflow traces or LangSmith for this.
+
+### 2. Evaluation
+
+Don't deploy an LLM feature without evaluation metrics:
+
+- **Accuracy** — Did the LLM give the right answer?
+- **Hallucination rate** — Did it make things up?
+- **Latency P95** — Is it fast enough for production?
+
+Build evaluation datasets from real production logs.
+
+### 3. Alerting
+
+When things go wrong, you need intelligent alerts — not a firehose of noise.
+
+```python
+def evaluate_pipeline_health(pipeline_id: str) -> dict:
+    """
+    Uses an LLM to analyze pipeline logs and surface actionable insights.
+    """
+    logs = fetch_recent_logs(pipeline_id)
+    summary = llm_analyze(logs)
+    if summary.requires_action:
+        dispatch_alert(summary)
+    return summary
+```
+
+## Tooling Choices
+
+| Tool | When to Use |
+|------|-------------|
+| MLflow | Built into Databricks, great for experiment tracking |
+| LangSmith | Best for LangChain/LangGraph traces |
+| Custom dashboards | Power BI + Databricks SQL for stakeholder views |
+
+## Common Pitfalls
+
+- **Logging everything** — You'll drown in data. Log smartly.
+- **Ignoring cost** — LLM observability itself costs money. Budget for it.
+- **No baselines** — Without historical data, you can't detect anomalies.
+
+## Final Thoughts
+
+LLM observability isn't an afterthought — it's a core part of building reliable AI systems. Invest in it early, and your 2 AM self will thank you.
