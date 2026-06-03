@@ -1,6 +1,6 @@
-# naveenrkcreates.com
+# Annamalai Raghupathy — Personal Portfolio
 
-Personal portfolio + writing site for [Naveen RK](https://instagram.com/naveenrkcreates), open-sourced as a reference / starting point for anyone who wants to build a similar site.
+Personal portfolio + writing site for [Annamalai Raghupathy](https://github.com/Annamalai23), open-sourced as a reference / starting point for anyone who wants to build a similar site.
 
 Built with **TanStack Start**, **Vite**, **React 19**, **Tailwind v4**, **shadcn/ui**, and **content-collections** for MDX-powered writing.
 
@@ -17,7 +17,7 @@ Built with **TanStack Start**, **Vite**, **React 19**, **Tailwind v4**, **shadcn
 
 ```bash
 git clone <this-repo>
-cd naveenrkcreates-opensourced
+cd persona
 npm install
 npm run dev
 ```
@@ -67,15 +67,15 @@ vite.config.ts            # Vite + TanStack Start + Nitro setup
 
 ## Customizing it for yourself
 
-This was Naveen's personal site, so most of the content is hard-wired into source files. Here's what to change:
+This was originally Naveen RK's personal site, so most of the content is hard-wired into source files. Here's what to change for your own fork:
 
-1. **Profile + nav** — search for `Naveen` across `src/` and replace text, links, and meta tags. Start with:
+1. **Profile + nav** — search for `Annamalai` across `src/` and replace text, links, and meta tags. Start with:
    - `src/routes/__root.tsx` (title, description, author meta)
    - `src/routes/index.tsx` (hero, headings, copy)
    - `src/components/layout/` (header/footer)
 2. **Job history, socials, system config, journey phases** — `src/lib/content.ts`. All four exported arrays drive the home and `/journey` pages.
 3. **Journey page narrative + images** — `src/routes/journey.tsx` and `public/images/journey/`.
-4. **Contact form recipient** — `src/routes/api/contact.ts` has the destination email hardcoded (`business@naveenrkcreates.com`). Change it, and set `RESEND_API_KEY` in your env (see below).
+4. **Contact form recipient** — `src/routes/api/contact.ts` has the destination email hardcoded. Change it, and set `RESEND_API_KEY` in your env (see below).
 5. **Favicon / OG image** — `public/favicon.ico` and any open-graph assets you add.
 6. **Package name** — update `name` in `package.json`.
 
